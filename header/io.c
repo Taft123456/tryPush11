@@ -7,10 +7,10 @@
 #define CLR_BIT(p,i) ((p) &= ~(1 << (i)))
 #define GET_BIT(p,i) ((p) & (1 << (i)))
 
-#define DATA_BUS PORTD		
-#define CONTROL_BUS PORTA	
-#define RS 0			
-#define E 1			
+#define DATA_BUS PORTC		
+#define CONTROL_BUS PORTD	
+#define RS 6			
+#define E 7			
 
 void LCD_ClearScreen(void) {
 	LCD_WriteCommand(0x01);
@@ -70,7 +70,7 @@ void delay_ms(int miliSec)
 	}
 }
 
-void LCD_CustomChar(char CGRAM_LOC, char *icon) {
+void LCD_CustomChar(char CGRAM_LOC, char* icon) {
 	char i = 0;
 	LCD_WriteCommand(0x40 | (CGRAM_LOC << 3));
 	for(i = 0; i < 8; i++) {

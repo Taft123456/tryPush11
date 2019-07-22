@@ -421,7 +421,7 @@ int Evaluation_tick(int Evaluation_state)
 	if (failure) {
 		condition = 0;
 		LCD_ClearScreen();
-		LCD_DisplayString(1, "     You Lose         Game Over!");
+		LCD_DisplayString(1, "     You Lose       Game Over!");
 		LCD_Cursor(0);
 	}
 	return Evaluation_state;
@@ -457,78 +457,18 @@ int Shooting_tick(int Shooting_state)
 	switch(Shooting_state) 
 	{
 		case Bullet1:
-			lower_area[10] = 2;
+			lower_area[10] = 0;
 			lower_area[11] = 0;
 			lower_area[12] = 0;
 			lower_area[13] = 0;
 			lower_area[14] = 0;
-			lower_area[15] = 0;//
-			lower_area[24] = 2;
-			lower_area[25] = 2;
-			lower_area[26] = 0;
-			lower_area[27] = 0;
-			lower_area[28] = 0;
-			lower_area[29] = 0;//
-			lower_area[38] = 2;
-			lower_area[39] = 0;
-			lower_area[40] = 2;
-			lower_area[41] = 0;
-			lower_area[42] = 0;
-			lower_area[43] = 0;
-			break;
-		case Bullet2:
-			lower_area[10] = 0;
-			lower_area[11] = 2;
-			lower_area[12] = 0;
-			lower_area[13] = 0;
-			lower_area[14] = 0;
-			lower_area[15] = 0;//
-			lower_area[24] = 0;
-			lower_area[25] = 2;
-			lower_area[26] = 2;
-			lower_area[27] = 0;
-			lower_area[28] = 0;
-			lower_area[29] = 0;//
-			lower_area[38] = 0;
-			lower_area[39] = 2;
-			lower_area[40] = 0;
-			lower_area[41] = 2;
-			lower_area[42] = 0;
-			lower_area[43] = 0;
-			break;
-		case Bullet3:
-			lower_area[10] = 0;
-			lower_area[11] = 0;
-			lower_area[12] = 2;
-			lower_area[13] = 0;
-			lower_area[14] = 0;
-			lower_area[15] = 0;//
-			lower_area[24] = 0;
-			lower_area[25] = 0;
-			lower_area[26] = 2;
-			lower_area[27] = 2;
-			lower_area[28] = 0;
-			lower_area[29] = 0;//
-			lower_area[38] = 0;
-			lower_area[39] = 0;
-			lower_area[40] = 2;
-			lower_area[41] = 0;
-			lower_area[42] = 2;
-			lower_area[43] = 0;
-			break;
-		case Bullet4:
-			lower_area[10] = 0;
-			lower_area[11] = 0;
-			lower_area[12] = 0;
-			lower_area[13] = 2;
-			lower_area[14] = 0;
-			lower_area[15] = 0;//
+			lower_area[15] = 2;//
 			lower_area[24] = 0;
 			lower_area[25] = 0;
 			lower_area[26] = 0;
-			lower_area[27] = 2;
+			lower_area[27] = 0;
 			lower_area[28] = 2;
-			lower_area[29] = 0;//
+			lower_area[29] = 2;//
 			lower_area[38] = 0;
 			lower_area[39] = 0;
 			lower_area[40] = 0;
@@ -536,7 +476,7 @@ int Shooting_tick(int Shooting_state)
 			lower_area[42] = 0;
 			lower_area[43] = 2;
 			break;
-		case Bullet5:
+		case Bullet2:
 			lower_area[10] = 0;
 			lower_area[11] = 0;
 			lower_area[12] = 0;
@@ -546,35 +486,95 @@ int Shooting_tick(int Shooting_state)
 			lower_area[24] = 0;
 			lower_area[25] = 0;
 			lower_area[26] = 0;
-			lower_area[27] = 0;
+			lower_area[27] = 2;
 			lower_area[28] = 2;
-			lower_area[29] = 2;//
-			lower_area[38] = 2;
+			lower_area[29] = 0;//
+			lower_area[38] = 0;
 			lower_area[39] = 0;
-			lower_area[40] = 0;
+			lower_area[40] = 2;
 			lower_area[41] = 0;
 			lower_area[42] = 2;
 			lower_area[43] = 0;
 			break;
-		case Bullet6:
+		case Bullet3:
 			lower_area[10] = 0;
+			lower_area[11] = 0;
+			lower_area[12] = 0;
+			lower_area[13] = 2;
+			lower_area[14] = 0;
+			lower_area[15] = 0;//
+			lower_area[24] = 0;
+			lower_area[25] = 0;
+			lower_area[26] = 2;
+			lower_area[27] = 2;
+			lower_area[28] = 0;
+			lower_area[29] = 0;//
+			lower_area[38] = 0;
+			lower_area[39] = 2;
+			lower_area[40] = 0;
+			lower_area[41] = 2;
+			lower_area[42] = 0;
+			lower_area[43] = 0;
+			break;
+		case Bullet4:
+			lower_area[10] = 0;
+			lower_area[11] = 0;
+			lower_area[12] = 2;
+			lower_area[13] = 0;
+			lower_area[14] = 0;
+			lower_area[15] = 0;//
+			lower_area[24] = 0;
+			lower_area[25] = 2;
+			lower_area[26] = 2;
+			lower_area[27] = 0;
+			lower_area[28] = 0;
+			lower_area[29] = 0;//
+			lower_area[38] = 2;
+			lower_area[39] = 0;
+			lower_area[40] = 2;
+			lower_area[41] = 0;
+			lower_area[42] = 0;
+			lower_area[43] = 0;
+			break;
+		case Bullet5:
+			lower_area[10] = 0;
+			lower_area[11] = 2;
+			lower_area[12] = 0;
+			lower_area[13] = 0;
+			lower_area[14] = 0;
+			lower_area[15] = 0;//
+			lower_area[24] = 2;
+			lower_area[25] = 2;
+			lower_area[26] = 0;
+			lower_area[27] = 0;
+			lower_area[28] = 0;
+			lower_area[29] = 0;//
+			lower_area[38] = 0;
+			lower_area[39] = 2;
+			lower_area[40] = 0;
+			lower_area[41] = 0;
+			lower_area[42] = 0;
+			lower_area[43] = 0;
+			break;
+		case Bullet6:
+			lower_area[10] = 2;
 			lower_area[11] = 0;
 			lower_area[12] = 0;
 			lower_area[13] = 0;
 			lower_area[14] = 0;
-			lower_area[15] = 2;//
+			lower_area[15] = 0;//
 			lower_area[24] = 2;
 			lower_area[25] = 0;
 			lower_area[26] = 0;
 			lower_area[27] = 0;
 			lower_area[28] = 0;
 			lower_area[29] = 2;//
-			lower_area[38] = 0;
-			lower_area[39] = 2;
+			lower_area[38] = 2;
+			lower_area[39] = 0;
 			lower_area[40] = 0;
 			lower_area[41] = 0;
 			lower_area[42] = 0;
-			lower_area[43] = 2;
+			lower_area[43] = 0;
 			break;
 		default:
 			break;
