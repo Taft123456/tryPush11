@@ -14,6 +14,9 @@
 #include "io.c"
 #include "timer.h"
 #include "scheduler.h"
+#ifdef _SIMULATE_
+#include "simAVRHeader.h"
+#endif
 
 unsigned char EEPROM_read(unsigned int Address)
 {
@@ -327,7 +330,7 @@ int Jumping_tick(int Jump_state)
 	{
 		LCD_ClearScreen();
 		LCD_WriteData(' ');
-		LCD_Cursor(hero_pos);
+		LCD_Cursor(position);
 		LCD_WriteData(0);
 		LCD_Cursor(0);
 	}
@@ -616,7 +619,6 @@ int Result_tick(int Score_Result_state)
 			break;
 		default:
 			score = 0;
-			j = 0;
 			Score_Result_state = Score;
 			break;
 	}
