@@ -747,7 +747,9 @@ int main(void)
 	LCD_init();
 	
 	if (EEPROM_read(0) == 255) 
-	{ EEPROM_write(0, 0); }
+	{ 
+		EEPROM_write(0, 0); 
+	}
 	
 	LCD_CustomChar(0, character);
 	LCD_CustomChar(1, enermy);
