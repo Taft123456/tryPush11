@@ -190,8 +190,10 @@ int Moving_tick(int Move_state)
 			}
 			break;
 		case Right:
-			if (!terminal) {
-				if (position < 25) {
+			if (!terminal) 
+			{
+				if (position < 25) 
+				{
 					if (position < 17) 
 					{
 						position += (upper_area[upper_scroll + position + 1] != 1 || 
@@ -224,7 +226,8 @@ int Moving_tick(int Move_state)
 		default:
 			break;
 	}
-	if (condition) {
+	if (condition) 
+	{
 		LCD_ClearScreen();
 		LCD_WriteData(' ');
 		LCD_Cursor(position);
