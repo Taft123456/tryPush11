@@ -43,7 +43,7 @@ unsigned char skeleton[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x04, 0x0A};
 unsigned char destination[8] = {0x0F, 0x0F, 0x0F, 0x08, 0x08, 0x08, 0x08, 0x1F};	
 
 unsigned char upper_area[49] = 
-{0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -439,13 +439,20 @@ int Scrolling_tick(int Map_Scrolling_state)
 		case Stay:
 			break;
 		case Scroll:
-			if ((position == 9 && upper_area[upper_scroll + 11] != 1) || 
-			    (position == 9 && upper_area[upper_scroll + 11] != 3) || 
-			    (position == 25 && lower_area[lower_scroll + 11] != 1) ||
-			    (position == 25 && lower_area[lower_scroll + 11] != 3)) 
+			if ((position == 9 || (position == 25))
 			{
-				upper_scroll += upper_scroll < 32 ? 1 : 0;
-				lower_scroll += lower_scroll < 32 ? 1 : 0;
+				if (upper_area[upper_scroll + 11] == 1 ||
+				    lower_area[lower_scroll + 11] == 1 ||
+				    upper_area[upper_scroll + 11] == 3 ||
+				    lower_area[lower_scroll + 11] == 3)
+				{
+					break;
+				}
+				else 
+				{
+					upper_scroll += upper_scroll < 32 ? 1 : 0;
+					lower_scroll += lower_scroll < 32 ? 1 : 0;
+				}
 			}
 			if (upper_scroll == 32) 
 			{ 
