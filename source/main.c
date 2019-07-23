@@ -39,10 +39,11 @@ unsigned char character[8] = {0x0E, 0x0E, 0x0E, 0x15, 0x0E, 0x04, 0x0A, 0x11};
 unsigned char enermy[8] = {0x07, 0x07, 0x01, 0x1D, 0x07, 0x01, 0x07, 0x05};
 unsigned char bullet[8] = {0x00, 0x00, 0x0F, 0x1F, 0x1F, 0x0F, 0x00, 0x00};
 unsigned char tomb[8] = {0x00, 0x00, 0x0E, 0x1F, 0x1F, 0x1F, 0x1F, 0x1F};
+unsigned char skeleton[8] = {0x00, 0x00, 0x00, 0x00, 0x00, 0x0A, 0x04, 0x0A};
 unsigned char destination[8] = {0x0F, 0x0F, 0x0F, 0x08, 0x08, 0x08, 0x08, 0x1F};	
 
 unsigned char upper_area[49] = 
-{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+{0, 0, 0, 0, 0, 0, 3, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
@@ -179,13 +180,27 @@ int Moving_tick(int Move_state)
 			{
 				if (position < 17) 
 				{
-					position -= (upper_area[upper_scroll + position - 1] != 1 ||
-						     upper_area[upper_scroll + position - 1] != 3) ? 1 : 0;
+					if (upper_area[upper_scroll + position - 1] == 1 ||
+					    upper_area[upper_scroll + position - 1] == 3)
+					{
+						break;
+					}
+					else 
+					{
+						position--;
+					}
 				} 
-				else 
+				else
 				{
-					position -= (lower_area[lower_scroll + position - 17] != 1 ||
-						     lower_area[lower_scroll + position - 17] != 3) ? 1 : 0;
+					if (lower_area[lower_scroll + position - 17] == 1 ||
+					    lower_area[lower_scroll + position - 17] == 3)
+					{
+						break;
+					}
+					else 
+					{
+						position--;
+					}
 				}
 			}
 			break;
@@ -196,13 +211,27 @@ int Moving_tick(int Move_state)
 				{
 					if (position < 17) 
 					{
-						position += (upper_area[upper_scroll + position + 1] != 1 || 
-						             upper_area[upper_scroll + position + 1] != 3) ? 1 : 0;
+						if (upper_area[upper_scroll + position + 1] == 1 ||
+					    	    upper_area[upper_scroll + position + 1] == 3)
+						{
+							break;
+						}
+						else 
+						{
+							position++;
+						}
 					} 
 					else 
 					{
-						position += (lower_area[lower_scroll + position - 15] != 1 ||
-							     lower_area[lower_scroll + position - 15] != 3) ? 1 : 0;
+						if (lower_area[lower_scroll + position - 15] == 1 ||
+					    	    lower_area[lower_scroll + position - 15] == 3)
+						{
+							break;
+						}
+						else 
+						{
+							position++;
+						}
 					}
 				}
 			} 
@@ -212,13 +241,27 @@ int Moving_tick(int Move_state)
 				{
 					if (position < 17) 
 					{
-						position += (upper_area[upper_scroll + position + 1] != 1 ||
-							     upper_area[upper_scroll + position + 1] != 3) ? 1 : 0;
+						if (upper_area[upper_scroll + position + 1] == 1 ||
+					    	    upper_area[upper_scroll + position + 1] == 3)
+						{
+							break;
+						}
+						else 
+						{
+							position++;
+						}
 					} 
 					else 
 					{
-						position += (lower_area[lower_scroll + position - 15] != 1 ||
-							     lower_area[lower_scroll + position - 15] != 3) ? 1 : 0;
+						if (lower_area[lower_scroll + position - 15] == 1 ||
+					    	    lower_area[lower_scroll + position - 15] == 3)
+						{
+							break;
+						}
+						else 
+						{
+							position++;
+						}
 					}
 				}
 			}
@@ -245,11 +288,17 @@ int Jumping_tick(int Jump_state)
 		case Init:
 			if (condition && (~PINA & 0x04)) 
 			{
-				if (position > 16 && (upper_area[upper_scroll + position - 16] != 1 ||
-					              upper_area[upper_scroll + position - 16] != 3)) 
+				if (position > 16) 
 				{
-					position -= 16;
-					Jump_state = Up;
+					if(upper_area[upper_scroll + position - 16] == 3)
+					{
+						Jump_state = Init;
+					}
+					else
+					{
+						position -= 16;
+						Jump_state = Up;
+					}
 				} 
 				else 
 				{
@@ -268,12 +317,22 @@ int Jumping_tick(int Jump_state)
 			} 
 			else 
 			{
-				if (lower_area[lower_scroll + position] != 1 ||
-				    lower_area[lower_scroll + position] != 3) 
+				if (position < 16)
 				{
-					position += 16;
-					Jump_state = Init;
-				} 
+					if (lower_area[lower_scroll + position] == 3)
+					{
+						Jump_state = Wait;
+					}
+					else
+					{
+						position += 16;
+						if (lower_area[lower_scroll + position - 16] == 1)
+						{
+							lower_area[lower_scroll + position - 16] = 5;
+						}
+						Jump_state = Init;
+					}
+				}
 				else 
 				{
 					Jump_state = Wait;
@@ -281,16 +340,21 @@ int Jumping_tick(int Jump_state)
 			}
 			break;
 		case Wait:
-			if (lower_area[lower_scroll + position] != 1 ||
-			    lower_area[lower_scroll + position] != 3) 
+			if (position < 16)
 			{
-				position += 16;
-				Jump_state = Init;
-			} 
-			else if (lower_area[lower_scroll + position] == 1)
-			{
-				lower_area[lower_scroll + position] = 3;
-				Jump_state = Wait;
+				if (lower_area[lower_scroll + position] == 3)
+				{
+					Jump_state = Wait;
+				} 
+				else
+				{
+					position += 16;
+					if (lower_area[lower_scroll + position - 16] == 1)
+					{
+						lower_area[lower_scroll + position - 16] = 5;
+					}
+					Jump_state = Init;
+				}
 			}
 			else 
 			{
@@ -324,7 +388,7 @@ int Jumping_tick(int Jump_state)
 		{ 
 			position = 9; 
 		}
-		if (position > 25) 
+		if (position > 25 && position < 32) 
 		{ 
 			position = 25; 
 		}
@@ -631,17 +695,17 @@ int Result_tick(int Score_Result_state)
 			if (victory) 
 			{
 				condition = 0;
-				if(lower_area[16] == 3)
+				if(lower_area[16] == 5)
 				{
 					score++;
 					PORTB = 0x04;
 				}
-				if(lower_area[30] == 3)
+				if(lower_area[30] == 5)
 				{
 					score++;
 					PORTB = 0x02;
 				}
-				if(lower_area[44] == 3)
+				if(lower_area[44] == 5)
 				{
 					score++;
 					PORTB = 0x01;
@@ -756,6 +820,7 @@ int main(void)
 	LCD_CustomChar(2, bullet);
 	LCD_CustomChar(3, tomb);
 	LCD_CustomChar(4, destination);
+	LCD_CustomChar(5, skeleton);
 	
 	unsigned short i; 
 	while(1) 
